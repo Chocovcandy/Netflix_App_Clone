@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:netflix_app_clone/screens/splash_screen.dart';
+import 'package:netflix_project/screens/splash_screen.dart';
 
-// import 'package:movie_app_2/screens/splash_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -27,6 +26,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
           ),
         ),
+        // fontFamily: GoogleFonts.ptSans().fontFamily,
         fontFamily: GoogleFonts.ptSans().fontFamily,
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)

@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:netflix_app_clone/api/api.dart';
+import 'package:netflix_project/api/api.dart';
 import '../model/movie_model.dart';
 import 'movie_detailed_screen.dart';
 
@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     //* Initialize popularMovies
-    upcomingMovies = Api().getPopularMovies();
+    popularMovies = Api().getPopularMovies();
 
     //* Initialize upcomingMovies
     upcomingMovies = Api().getUpcomingMovies();
@@ -42,18 +42,24 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.black12,
 
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.black12,
 
-        //* Create "Netflix logo"
-        leading: Image.asset('assets/netflix.png', height: 50),
+        //* Netflix logo in AppBar
+        title: Image.asset(
+          'assets/logo.png',
+          width: 130,
+        ),
 
-        //* Create "User icon"
-        actions: const [
-          CircleAvatar(
-            backgroundImage: AssetImage('assets/user_logo.png'),
+        //* Icon Person for account
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.person,
+              size: 40,
+              color: Color.fromARGB(255, 231, 228, 228),
+            ),
           ),
-          SizedBox(width: 15),
         ],
       ),
 
@@ -63,8 +69,6 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-              //* Create upcoming movie section. Use 'CarouselSlider.builder' instead of 'ListView.builder' . Use backDropPath as url of network image. Refer below Popular section!!
 
               //* Upcoming Movies
               const Text(
@@ -148,7 +152,6 @@ class _HomeState extends State<Home> {
 
                         return InkWell(
                             onTap: () {
-                              //* You should understand it. It gives movie data to MovieDetailScreen.
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -181,7 +184,6 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              //* Create Top Rated movie section. Use posterPath as url of network image. Refer Popular section!!
               const Text(
                 'Top Rated',
                 style: TextStyle(color: Colors.white),
@@ -206,40 +208,38 @@ class _HomeState extends State<Home> {
                         final movie = movies[index];
 
                         return InkWell(
-                            onTap: () {
-                              //* You should understand it. It gives movie data to MovieDetailScreen.
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MovieDetailScreen(
-                                    movie: movies[index],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: 150,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.network(
-                                  "https://image.tmdb.org/t/p/original/${movie.posterPath}",
-                                  height: 120,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MovieDetailScreen(
+                                  movie: movies[index],
                                 ),
                               ),
-                            ));
+                            );
+                          },
+                          child: Container(
+                            width: 150,
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
+                                "https://image.tmdb.org/t/p/original/${movie.posterPath}",
+                                height: 120,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
                       },
                     );
                   },
                 ),
               ),
-
             ],
           ),
         ),

@@ -1,8 +1,6 @@
 import 'dart:convert';
-// ignore: unused_import
-import 'package:netflix_app_clone/api/api.dart';
 import 'package:http/http.dart' as http;
-import 'package:netflix_app_clone/api/constants.dart';
+import 'package:netflix_project/api/constants.dart';
 import '../model/movie_model.dart';
 
 class Api {
@@ -18,6 +16,7 @@ class Api {
   //* topRatedApiUrl variable with refering upComingApiUrl.
   final topRatedApiUrl =
       "https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey";
+
 
   //* Create getUpcomingMovies()
   Future<List<Movie>> getUpcomingMovies() async {
